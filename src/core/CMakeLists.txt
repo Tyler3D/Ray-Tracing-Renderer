@@ -16,6 +16,7 @@ set (HEADERS
   geometry/sphere.h
   geometry/surface.h
   geometry/triangle.h
+  geometry/surface_list.h
 
   # parser
   parser/raytra_parser.h
@@ -38,6 +39,7 @@ set (SOURCES
   geometry/sphere.cc
   geometry/surface.cc
   geometry/triangle.cc
+  geometry/surface_list.cc
 
   # parser
   parser/raytra_parser.cc

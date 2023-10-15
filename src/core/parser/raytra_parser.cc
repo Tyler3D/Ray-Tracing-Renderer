@@ -8,6 +8,7 @@
 #include "core/geometry/sphere.h"
 #include "core/camera/camera.h"
 #include "core/geometry/triangle.h"
+#include "core/geometry/surface_list.h"
 
 namespace olio {
 namespace core {
@@ -42,6 +43,8 @@ bool RaytraParser::ParseFile(const std::string &filename, Surface::Ptr &scene,
   int camera_count = 0;
   int surface_count = 0;
 
+  std::vector<Surface::Ptr> surface_list;
+
   // parse file
   for (string line; getline(in, line);) {
     // skip comments and empty lines
@@ -62,7 +65,8 @@ bool RaytraParser::ParseFile(const std::string &filename, Surface::Ptr &scene,
 	// sphere
 	Real x, y, z, r;
 	iss >> x >> y >> z >> r;
-	scene = Sphere::Create(Vec3r{x, y, z}, r);
+  surface_list.push_back(Sphere::Create(Vec3r{x, y, z}, r));
+  //scene = Sphere::Create(Vec3r{x, y, z}, r);
 	++surface_count;
 	break;
       }
@@ -114,8 +118,10 @@ bool RaytraParser::ParseFile(const std::string &filename, Surface::Ptr &scene,
 	// triangle
 	Real ax, ay, az, bx, by, bz, cx, cy, cz;
 	iss >> ax >> ay >> az >> bx >> by >> bz >> cx >> cy >> cz;
-	scene = Triangle::Create(Vec3r{ax, ay, az}, Vec3r{bx, by, bz},
-                                 Vec3r{cx, cy, cz});
+  surface_list.push_back(Triangle::Create(Vec3r{ax, ay, az}, Vec3r{bx, by, bz},
+                                 Vec3r{cx, cy, cz}));
+	//scene = Triangle::Create(Vec3r{ax, ay, az}, Vec3r{bx, by, bz},
+  //                               Vec3r{cx, cy, cz});
 	++surface_count;
 	break;
       }
@@ -132,11 +138,14 @@ bool RaytraParser::ParseFile(const std::string &filename, Surface::Ptr &scene,
     return false;
   }
 
-  if (surface_count > 1) {
-    spdlog::error("Parse error: scene file currently can only contain one "
-		  "surface");
-    return false;
-  }
+  //if (surface_count > 1) {
+  //  spdlog::error("Parse error: scene file currently can only contain one "
+	//	  "surface");
+  //  return false;
+  //}
+
+  scene = SurfaceList::Create(surface_list);
+
   return true;
 }
 

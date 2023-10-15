@@ -1,3 +1,5 @@
+## Ray Tracing Rendering for COMS 4160 @ Columbia University
+
 ## DEPENDENCIES
 
 * Eigen3

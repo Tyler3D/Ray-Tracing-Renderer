@@ -1,5 +1,15 @@
 ## Ray Tracing Rendering for COMS 4160 @ Columbia University
 
+## Usage
+```
+./olio_rtbasic --input_scene --output
+```
+Test files are available in data/scenes. With the change to material/lighting system some no longer work. The following still work.
+```
+Multiple_surfaces_with_mat.scn
+Multiple_surfaces_with_mat_2.scn
+```
+
 ## DEPENDENCIES
 
 * Eigen3

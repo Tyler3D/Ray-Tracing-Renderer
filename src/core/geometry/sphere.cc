@@ -1,10 +1,13 @@
 // ======================================================================
 // Olio: Simple renderer
+// Copyright (C) 2023 by Tyler Manrique
 //
+// Author: Tyler Manrique, 2023
 // ======================================================================
 
 //! \file       sphere.cc
 //! \brief      Sphere class
+//! \author     Tyler Manrique, 2023
 
 #include "core/geometry/sphere.h"
 #include <spdlog/spdlog.h>

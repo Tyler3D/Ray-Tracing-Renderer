@@ -7,7 +7,7 @@
 
 //! \file       triangle.cc
 //! \brief      Triangle class
-//! \author     Tyler Manrique, 2022
+//! \author     Tyler Manrique, 2023
 
 #include "core/geometry/triangle.h"
 #include <spdlog/spdlog.h>

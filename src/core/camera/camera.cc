@@ -7,7 +7,7 @@
 
 //! \file       camera.cc
 //! \brief      Camera class
-//! \author     Tyler Manrique, 2022
+//! \author     Tyler Manrique, 2023
 
 #include "core/camera/camera.h"
 #include <iostream>

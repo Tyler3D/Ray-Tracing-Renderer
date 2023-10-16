@@ -1,10 +1,13 @@
 // ======================================================================
 // Olio: Simple renderer
+// Copyright (C) 2023 by Tyler Manrique
 //
+// Author: Tyler Manrique, 2023
 // ======================================================================
 
 //! \file       camera.cc
 //! \brief      Camera class
+//! \author     Tyler Manrique, 2022
 
 #include "core/camera/camera.h"
 #include <iostream>

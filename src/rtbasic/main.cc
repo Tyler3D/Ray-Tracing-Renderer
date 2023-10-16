@@ -87,11 +87,12 @@ main(int argc, char **argv)
   Camera::Ptr camera;
   Surface::Ptr scene;
   Vec2i image_size;
-  if (!parser.ParseFile(input_scene_name, scene, camera, image_size))
+  std::vector<Light::Ptr> lights;
+  if (!parser.ParseFile(input_scene_name, scene, lights, camera, image_size))
     return -1;
   RayTracer raytracer{};
   raytracer.SetImageHeight((uint) image_size[1]);
-  raytracer.Render(scene, camera);
+  raytracer.Render(scene, lights, camera);
   raytracer.WriteImage(output_name);
 
   return 0;

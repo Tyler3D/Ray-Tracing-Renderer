@@ -102,7 +102,7 @@ public:
   //! \param[in] ray Ray that hit the surface
   //! \param[in] face_normal Surface normal at hit position
   inline void SetNormal(const Ray &ray, const Vec3r &face_normal) {
-    if ((ray.GetOrigin() + ray.GetDirection()).dot(face_normal) < 0) {
+    if ((ray.GetDirection()).dot(face_normal) < 0) {
             this->front_face_ = true;
             this->normal_ = face_normal;
         } else {
@@ -116,10 +116,8 @@ public:
   //! \param[in] face_normal Surface normal at hit point
   //! \param[in] front_face whether the hit point was front or back facing
   inline void SetNormal(const Vec3r &face_normal, bool front_face) {
-      if (front_face) 
-          this->normal_ = face_normal;
-      else
-          this->normal_ = -1 * face_normal;
+      this->front_face_ = front_face;
+      this->normal_ = face_normal;
   }
 
   //! \brief Set surface that was hit

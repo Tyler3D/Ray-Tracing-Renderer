@@ -23,6 +23,8 @@
 #include "core/node.h"
 #include "core/geometry/surface.h"
 #include "core/camera/camera.h"
+#include "core/light/light.h"
+#include "core/material/phong_material.h"
 
 namespace olio {
 namespace core {
@@ -49,7 +51,7 @@ public:
   //! \param[in] camera Camera used for generating rays and rendering
   //!            the scene from its point of view
   //! \return True on success
-  bool Render(Surface::Ptr scene, Camera::Ptr camera);
+  bool Render(Surface::Ptr scene, const std::vector<Light::Ptr> &lights, Camera::Ptr camera);
 
   //! \brief Set output image height. The image width will be
   //! determined based on the aspect ratio of the camera's viewport.
@@ -77,7 +79,7 @@ protected:
   //! \param[in] scene Input scene
   //! \param[out] ray_color Output ray color
   //! \return True if ray intersects a surface in the scene
-  bool RayColor(const Ray &ray, Surface::Ptr scene, Vec3r &ray_color);
+  bool RayColor(const Ray &ray, Surface::Ptr scene, const std::vector<Light::Ptr> &lights, Vec3r &ray_color);
 
   //! \brief Gamma correct input image
   //! \details Input image is assumed to be of type CV_64FC3

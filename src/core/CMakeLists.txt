@@ -18,6 +18,13 @@ set (HEADERS
   geometry/triangle.h
   geometry/surface_list.h
 
+  # light
+  light/light.h
+
+  # material
+  material/material.h
+  material/phong_material.h
+
   # parser
   parser/raytra_parser.h
 
@@ -40,6 +47,13 @@ set (SOURCES
   geometry/surface.cc
   geometry/triangle.cc
   geometry/surface_list.cc
+
+  # light
+  light/light.cc
+
+  # material
+  material/material.cc
+  material/phong_material.cc
 
   # parser
   parser/raytra_parser.cc

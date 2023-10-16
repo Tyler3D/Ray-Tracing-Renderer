@@ -64,9 +64,10 @@ namespace core {
                 // Intersect doesn't happen in range
                 return false;
             }
+                const Vec3r &hit_point = ray.At(wantedIntersect);
                 hit_record.SetRayT(wantedIntersect);
-                hit_record.SetPoint(ray.At(wantedIntersect));
-                hit_record.SetNormal(ray, (ray.GetOrigin() - this->center_) / this->radius_);
+                hit_record.SetPoint(hit_point);
+                hit_record.SetNormal(ray, (hit_point - this->center_).normalized());
                 hit_record.SetSurface(GetPtr());
                 return true;
         }

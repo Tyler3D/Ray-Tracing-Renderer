@@ -21,6 +21,7 @@ namespace core {
 
 class Ray;
 class HitRecord;
+class Material;
 
 //! \class Surface
 //! \brief Surface class
@@ -41,7 +42,17 @@ public:
   //! \return True if ray intersected with surface
   virtual bool Hit(const Ray &ray, Real tmin, Real tmax,
 		   HitRecord &hit_record);
+  
+  //! \brief Set surface's material
+  //! \param[in] material Material to set
+  virtual void SetMaterial(std::shared_ptr<Material> material);
+
+  //! \brief Get surface's material
+  //! \return Node's material
+  virtual std::shared_ptr<Material> GetMaterial();
+
 protected:
+  std::shared_ptr<Material> material_; //!< node material
 private:
 };
 

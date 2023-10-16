@@ -2,7 +2,8 @@
 // Olio: Simple renderer
 // Copyright (C) 2022 by Hadi Fadaifard
 //
-// Author: Hadi Fadaifard, 2022
+// Authors: Hadi Fadaifard, 2022
+// Tyler Manrique, 2023
 // ======================================================================
 
 //! \file       raytracer.cc
@@ -22,21 +23,31 @@ namespace core {
 using namespace std;
 
 bool
-RayTracer::RayColor(const Ray &ray, Surface::Ptr scene, Vec3r &ray_color)
+RayTracer::RayColor(const Ray &ray, Surface::Ptr scene, const std::vector<Light::Ptr> &lights, Vec3r &ray_color)
 {
-    HitRecord rec;
-    if (scene->Hit(ray, kEpsilon, kInfinity, rec)) {
-        // We have a hit
-        ray_color = {1, 0, 0};
-        return true;
+    // check whether ray hits any scene object
+    ray_color = Vec3r{0, 0, 0};
+    HitRecord hit_record;
+    if (!scene->Hit(ray, kEpsilon, kInfinity, hit_record))
+        return false;
+      std::shared_ptr<PhongMaterial> material = \
+      std::dynamic_pointer_cast<PhongMaterial>(hit_record.GetSurface()->GetMaterial());
+    if (material && material->GetName() == "PhongMaterial") {
+        for (Light::Ptr light : lights) {
+            //std::cout << "Adding Light" << std::endl;
+            ray_color += light->Illuminate(hit_record, -1 * ray.GetDirection());
+        }
+    } else {
+      // Legacy no material system
+      // Mark everything as red
+      ray_color = {1, 0, 0};
     }
-    ray_color = {0, 0, 0};
-    return false;
+    return true;
 }
 
 
 bool
-RayTracer::Render(Surface::Ptr scene, Camera::Ptr camera)
+RayTracer::Render(Surface::Ptr scene, const std::vector<Light::Ptr> &lights, Camera::Ptr camera)
 {
   // error checking
   if (!scene || !camera)
@@ -74,7 +85,7 @@ RayTracer::Render(Surface::Ptr scene, Camera::Ptr camera)
       auto &pixel = rendered_image_.at<cv::Vec3d>(y, x);
       Ray ray = camera->GetRay(((Real) x) / rendered_image_.cols, ((Real) y) / rendered_image_.rows);
       Vec3r pix;
-      this->RayColor(ray, scene, pix);
+      this->RayColor(ray, scene, lights, pix);
       pixel[0] = pix[0];
       pixel[1] = pix[1];
       pixel[2] = pix[2];

@@ -9,6 +9,10 @@ Test files are available in data/scenes. With the change to material/lighting sy
 Multiple_surfaces_with_mat.scn
 Multiple_surfaces_with_mat_2.scn
 ```
+Here's what they look like
+
+![Alt text](data/demo/mat1.png)
+![Alt text](data/demo/mat2.png)
 
 ## DEPENDENCIES
 
